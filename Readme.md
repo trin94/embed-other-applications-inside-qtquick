@@ -14,7 +14,7 @@ Make sure that you have a mpv-2.dll **not a mpv-1.dll/mpv-3.dll** and place it a
 
 ## Setup Linux
 
-Make sure you have a libmpv version installed (v0.33.0 - v0.35.0). If not install one via your package manager.
+Make sure you have a libmpv version installed (v0.33.0+). If not install one via your package manager.
 
 ## Video Licences
 
