@@ -16,7 +16,19 @@ Make sure that you have a mpv-2.dll **not a mpv-1.dll/mpv-3.dll** and place it a
 
 Make sure you have a libmpv version installed (v0.33.0+). If not install one via your package manager.
 
-## Video Licences
+# Demonstration
+
+## Windows
+
+https://github.com/trin94/embed-other-applications-inside-qtquick/assets/12988790/d166d418-c542-4aab-8f60-8112dfb6e5a4
+
+## Linux Xorg
+
+[sample-linux-xorg.webm](https://github.com/trin94/embed-other-applications-inside-qtquick/assets/12988790/23c9e3cc-fadf-492f-bab1-b55d4d584ab2)
+
+With `flags: Qt.FramelessWindowHint | Qt.Tool` in the transparent window.
+
+# Video Licences
 
 Videos are from: https://github.com/Matroska-Org/matroska-test-files
 
