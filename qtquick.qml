@@ -3,66 +3,78 @@ import QtQuick.Controls.Material
 import pyobjects
 
 ApplicationWindow {
-    id: mainWindow
+    id: root
 
+    title: "Click to start video playback - It works :)"
     width: 600
     height: 600
     visible: true
+    // flags: Qt.FramelessWindowHint
 
-    Material.theme: Material.Dark
+    onClosing: mpvItem.terminate()
 
-    Item {
-        id: someItem
-        anchors.margins: 100
-        anchors.fill: parent
-
-        WindowContainer {
-            anchors.fill: parent
-            id: windowContainer
-
-            window: MpvItem {
-                id: mpvItem
-            }
-        }
+    Rectangle {
+        id: windowWrapper
+        height: root.height
+        width: root.width
 
         Window {
-            parent: someItem
+            x: root.x
+            y: root.y
+            width: windowWrapper.width
+            height: windowWrapper.height
             visible: true
-            width: parent.width
+            color: 'transparent'
+            flags: Qt.FramelessWindowHint
 
             MenuBar {
                 id: menuBar
+                width: root.width
 
                 Menu {
-                    title: 'MENU 1'
+                    title: 'Menu'
 
-                    MenuItem { text: 'Action 11' }
-                    MenuItem { text: 'Action 12' }
-                    MenuItem { text: 'Action 13' }
-                    MenuItem { text: 'Action 14' }
-                    MenuItem { text: 'Action 15' }
+                    MenuItem { text: 'Action 1' }
+                    MenuItem { text: 'Action 2' }
+                    MenuItem { text: 'Action 3' }
                 }
+            }
 
-                Menu {
-                    title: 'MENU 2'
+            Menu {
+                id: contextMenu
+                MenuItem { text: 'Context Action 1' }
+                MenuItem { text: 'Context Action 2' }
+                MenuItem { text: 'Context Action 3' }
+            }
 
-                    MenuItem { text: 'Action 21' }
-                    MenuItem { text: 'Action 22' }
-                    MenuItem { text: 'Action 23' }
-                    MenuItem { text: 'Action 24' }
-                    MenuItem { text: 'Action 25' }
+            MouseArea {
+                id: mouseArea
+
+                z: -1
+                anchors.fill: parent
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                cursorShape: Qt.PointingHandCursor
+
+                onClicked: mouse => {
+                    if (mouse.button === Qt.LeftButton) {
+                        mpvItem.play()
+                    } else if (mouse.button === Qt.RightButton) {
+                        contextMenu.popup()
+                    }
                 }
             }
         }
-    }
 
-    MouseArea {
-        id: mouseArea
+        WindowContainer {
+            y: menuBar.height
+            height: root.height - menuBar.height
+            width: root.width
 
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        cursorShape: Qt.OpenHandCursor
-
-        onClicked: mpvItem.play()
+            window: MpvItem {
+                id: mpvItem
+                flags: Qt.FramelessWindowHint
+                color: "black"
+            }
+        }
     }
 }

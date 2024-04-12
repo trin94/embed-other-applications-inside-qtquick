@@ -2,9 +2,9 @@ import os
 import platform
 import sys
 
-from PySide6.QtCore import QUrl, Slot
-from PySide6.QtGui import QWindow
+from PySide6.QtCore import QUrl, Slot, Qt
 from PySide6.QtQml import QQmlApplicationEngine, QmlElement
+from PySide6.QtQuick import QQuickWindow
 from PySide6.QtWidgets import QApplication
 
 QML_IMPORT_NAME = "pyobjects"
@@ -12,7 +12,7 @@ QML_IMPORT_MAJOR_VERSION = 1
 
 
 @QmlElement
-class MpvItem(QWindow):
+class MpvItem(QQuickWindow):
 
     def __init__(self):
         super().__init__()
@@ -27,6 +27,10 @@ class MpvItem(QWindow):
     @Slot()
     def play(self):
         self._player.play('test1.mkv')
+
+    @Slot()
+    def terminate(self):
+        self._player.terminate()
 
 
 class MyApp(QApplication):
